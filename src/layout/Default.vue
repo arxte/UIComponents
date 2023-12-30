@@ -10,12 +10,6 @@
 
 <script setup lang="ts">
 import menus from "@/modules";
-
-const check = () => {
-  console.log("checked");
-};
-
-check();
 </script>
 
 <style scoped lang="scss">
