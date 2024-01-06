@@ -1,4 +1,4 @@
-<template><div style="color: red">QEE</div></template>
+<template><div style="color: red">Sliders</div></template>
 
 <script></script>
 

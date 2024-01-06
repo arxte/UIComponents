@@ -1,4 +1,4 @@
-<template><div style="color: red;">sdfsad</div></template>
+<template><div style="color: red">Inputs</div></template>
 
 <script></script>
 

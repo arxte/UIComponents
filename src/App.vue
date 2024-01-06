@@ -23,23 +23,42 @@ const toggleDark = useToggle(isDark)
 }
 </style> -->
 
-
 <template>
   <div class="container">
-      <div class="menu">
-          <div v-for="menu in menus" :key="menu.name" class="wrapper-links">
-              <router-link :to="menu.url" class="link">{{ menu.name }}</router-link>
-          </div>
+    <section class="menu">
+      <div class="wrapper-links">
+        <router-link
+          v-for="menu in menus"
+          :key="menu.name"
+          class="link"
+          :to="menu.url"
+          >{{ menu.name }}</router-link
+        >
       </div>
 
-      <router-view></router-view>
+      <div class="wrapper-icon">
+        <img
+          src="../public/icons/sun.svg"
+          @click="toggleDark()"
+          style="width: 24px; height: 24px"
+        />
+
+        <i inline-block align-middle i=""></i>
+      </div>
+    </section>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script setup lang="ts">
-import menus from "@/modules"
-</script>
+import menus from "@/modules";
+import { ref } from "vue";
+import { useDark, useToggle } from "@vueuse/core";
 
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
+</script>
 
 <style scoped lang="scss">
 .menu {
@@ -48,42 +67,54 @@ import menus from "@/modules"
   padding: 15px 25px;
   background-color: $blue-light;
   border-radius: 6px;
+
+  .wrapper-links {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    .link {
+      position: relative;
+      color: $blue-dark;
+      text-decoration: none;
+      display: block;
+    }
+
+    .router-link-active {
+      color: $blue-medium;
+    }
+
+    .router-link-active:before {
+      background-color: $blue-medium;
+      width: 100%;
+    }
+  }
 }
 
-.link {
-  color: $blue-dark;
-  text-decoration: none;
-  display: block;
-}
-
-.link::first-letter { 
+.link::first-letter {
   text-transform: uppercase;
 }
 
-.wrapper-links {
-  position: relative;
-}
+// .link:active {
+//   color: $blue-medium;
+// }
 
-.wrapper-links:before {
-  content: '';
+.link:before {
+  content: "";
   position: absolute;
   width: 0%;
   height: 2px;
   background-color: $blue-dark;
   bottom: -3px;
   left: 0;
-  transition: width .2s ease;
+  transition: width 0.2s ease;
 }
 
-.wrapper-links:hover:before {
+.link:hover:before {
   width: 100%;
 }
 
-.wrapper-links:active:before {
-  background-color: $blue-medium;
-}
-
-.link:active {
-  color: $blue-medium;
-}
+// .link:active:before {
+//   background-color: $blue-medium;
+// }
 </style>
