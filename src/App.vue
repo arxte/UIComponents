@@ -37,13 +37,13 @@ const toggleDark = useToggle(isDark)
       </div>
 
       <div class="wrapper-icon">
-        <img
+        <!-- <img
           src="../public/icons/sun.svg"
           @click="toggleDark()"
           style="width: 24px; height: 24px"
-        />
+        /> -->
 
-        <i inline-block align-middle i=""></i>
+        <i class="st"></i>
       </div>
     </section>
 
@@ -61,6 +61,15 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <style scoped lang="scss">
+.st {
+  mask-image: url("../public/icons/moon.svg");
+  -webkit-mask-image: url("../public/icons/moon.svg");
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: black;
+}
+
 .menu {
   display: flex;
   justify-content: space-between;
