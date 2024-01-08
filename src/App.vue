@@ -36,14 +36,15 @@ const toggleDark = useToggle(isDark)
         >
       </div>
 
-      <div class="wrapper-icon">
+      <div class="wrapper-icon" @click="toggleDark()">
         <!-- <img
           src="../public/icons/sun.svg"
           @click="toggleDark()"
           style="width: 24px; height: 24px"
         /> -->
 
-        <i class="st"></i>
+        <UIIcon :icon="isDark ? 'moon' : 'sun'" style="width: 16px; height: 16px;" class="ic" :style="styleIcon"></UIIcon>
+        <!-- {{ toggleDark() }} -->
       </div>
     </section>
 
@@ -53,21 +54,46 @@ const toggleDark = useToggle(isDark)
 
 <script setup lang="ts">
 import menus from "@/modules";
-import { ref } from "vue";
+import UIIcon from '@/components/UI/Icon.vue'
+import { ref, computed } from "vue";
 import { useDark, useToggle } from "@vueuse/core";
 
-const isDark = useDark();
+const isDark = useDark({
+  disableTransition: false,
+});
 const toggleDark = useToggle(isDark);
+
+const styleIcon = computed(() => {
+  // return "align-items: flex-end"
+
+  return isDark.value ? "left: 61%" : "left: 5px"
+})
 </script>
 
 <style scoped lang="scss">
-.st {
-  mask-image: url("../public/icons/moon.svg");
-  -webkit-mask-image: url("../public/icons/moon.svg");
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-color: black;
+.wrapper-icon {
+  width: 58px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2px 5px 2px;
+  border: 1px solid #fff;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-end;
+
+  // transition: all 1s ease !important;
+
+  position: relative;
+}
+
+.ic {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translate(-0px, -50%);
+
+  transition: .2s;
 }
 
 .menu {
